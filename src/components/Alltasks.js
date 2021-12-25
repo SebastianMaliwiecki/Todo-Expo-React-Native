@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 export default function Alltasks({navigation, route}) {
     
-    const {Tasks} = route.params
+    const {Tasks, SetList} = route.params
     console.log(Tasks);
 
     return (
@@ -22,13 +22,13 @@ export default function Alltasks({navigation, route}) {
                         <View style={styles.taskWrapper}>
                             <View style={styles.insideTask}>
                                 <Text style={styles.task}>
-                                    {item.taskText} 
+                                    {item.taskText} Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis assumenda eos provident odit unde amet magni illo porro pariatur autem molestias nisi, commodi eligendi debitis sit esse doloremque voluptatem. Obcaecati?
                                 </Text>
                                 <Text style={styles.task}>
-                                    {`Created: ${new Date().getDate()}/${new Date().getMonth()+1}`}
+                                    {`Created: ${new Date().getDate()}/${new Date().getMonth()+1} | Due: `}
                                 </Text>
-                                <TouchableOpacity style={styles.check} onPress={() => {console.log("test")}}>
-                                        <AntDesign name="check" size={35} color="white" />
+                                <TouchableOpacity style={styles.check} onLongPress={() => {console.log("test")}}>
+                                    <AntDesign name="check" size={27} color="white" />
                                 </TouchableOpacity>
                             </View>    
                         </View> 
@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
         fontSize: 17,
         fontWeight: "600",
         marginBottom: 20,
-        top: 5
+        top: 5,
+        width: '95%'
     },
     check: {
         backgroundColor: 'green',
@@ -71,9 +72,18 @@ const styles = StyleSheet.create({
         right: 10,
         width: 'auto',
         borderRadius: 25,
-        padding: 5
+        padding: 3,
     },
     insideTask: {
         padding: 5,
+    },
+    taskDate: {
+        left: 10,
+        bottom: 7,
+        fontSize: 17,
+        fontWeight: "600",
+        marginBottom: 20,
+        top: 5,
+        color: 'rgb(170,170,170)',
     }
 })

@@ -1,12 +1,15 @@
-import { NavigationHelpersContext } from '@react-navigation/native';
-import React from 'react';
-import { View, StyleSheet, TextInput, TouchableOpacity, Text, Keyboard, Alert } from 'react-native';
+import React, {useState} from 'react'
+import { View, Text, StyleSheet, TextInput, DatePickerIOS } from 'react-native'
 import { v4 as uuidv4 } from 'uuid';
 
-function Form({toDoList, setToDoList, inputText, setInputText, navigation}) {
+const Form = ({route}) => {
+
+    const {toDoList, setToDoList, inputText, setInputText} = route.params
+    const [chosenDate, setChosenDate] = useState(new Date());
 
     const saveTaskToList = () => {
         console.log(inputText);
+
         if(inputText==="") {
             Alert.alert(
                 "Unable to add new task!",
@@ -31,57 +34,39 @@ function Form({toDoList, setToDoList, inputText, setInputText, navigation}) {
     }
 
     return (
-        <View style={styles.inputTaskWrapper}>
+        <View style={styles.container}>
             <TextInput
                 style={styles.input}
                 onChangeText={setInputText}
                 placeholder="Type new task..."
                 placeholderTextColor="rgb(170,170,170)" 
-                value={inputText}
                 keyboardAppearance='dark'
             />
-            <TouchableOpacity onPress={() => {
-                Keyboard.dismiss()
-                saveTaskToList()
-            }}
-            >
-                <View style="inputTaskWrapper">
-                    <Text style={styles.addTask}>
-                        +
-                    </Text>
-                </View>
-            </TouchableOpacity>
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'rgb(45,45,45)',
+    },
     input: {
         backgroundColor: 'rgb(29,29,29)',
-        height: 50,
         borderWidth: 1,
-        padding: 10,
+        padding: 15,
         borderRadius: 15,
-        width: 320,
         color: 'white',
         fontSize: 15,
-        left: 7,
-    },
-    inputTaskWrapper: {
-        marginTop: 15,
-        height: 'auto',
-    },
-    addTask: {
-        color: 'white',
-        fontSize: 60,
+        width: 'auto',
         marginLeft: 10,
-        justifyContent: 'center',
-        top: -5,
+        marginRight: 10,
+        marginTop: 10,
+        borderTopWidth: 0,
+        borderRightWidth: 0,
+        borderLeftWidth: 0,
+        borderBottomWidth: 0,
     },
-    inputTaskWrapper: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    }
 })
 
-export default Form;
+export default Form
